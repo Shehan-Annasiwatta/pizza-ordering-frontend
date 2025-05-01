@@ -15,7 +15,7 @@ export default function CartPage() {
 
   const totalPrice = items.reduce((sum, item) => sum + getLineTotal(item), 0);
 
-  const isLoggedIn = false; // ✅ replace with auth state later
+  const isLoggedIn = true; // ✅ replace with auth state later
 
   const handleCheckout = () => {
     setError('');
