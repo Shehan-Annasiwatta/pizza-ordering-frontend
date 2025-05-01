@@ -1,27 +1,21 @@
-import './styles/globals.css';
-import React from 'react';
-import { ThemeProvider, CssBaseline } from '@mui/material';
-import theme from '../theme/theme';
-import { CartProvider } from '../context/CartContext';
-import Navbar from '@/components/Navbar';
-
+import ClientProviders from "@/components/ClientProviders";
+import React from "react";
 
 export const metadata = {
-  title: 'Pizza Ordering App',
-  description: 'Order your favorite pizza online',
+  title: "Pizza Ordering App",
+  description: "Order your favorite pizza online",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
       <body>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <CartProvider>
-            <Navbar />
-            {children}
-          </CartProvider>
-        </ThemeProvider>
+        {/* Everything that needs React hooks or MUI theme lives in ClientProviders */}
+        <ClientProviders>{children}</ClientProviders>
       </body>
     </html>
   );

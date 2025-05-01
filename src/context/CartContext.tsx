@@ -1,6 +1,6 @@
+"use client";
 import { PizzaItem } from "@/types";
 import React, { createContext, useContext, useState, ReactNode } from "react";
-
 
 interface CartContextType {
   items: PizzaItem[];
