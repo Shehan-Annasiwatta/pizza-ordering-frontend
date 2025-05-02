@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import {
   Container,
   TextField,
@@ -9,19 +9,19 @@ import {
   Typography,
   Box,
   Alert,
-} from '@mui/material';
-import NextLink from 'next/link';
+} from "@mui/material";
+import NextLink from "next/link";
 
 export default function RegisterPage() {
   const router = useRouter();
   const [form, setForm] = useState({
-    name: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
   });
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -29,24 +29,22 @@ export default function RegisterPage() {
 
   const handleRegister = (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
-    setSuccess('');
+    setError("");
+    setSuccess("");
 
-    // Corrected email validation regex
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(form.email)) {
-      setError('Invalid email format');
+      setError("Invalid email format");
       return;
     }
 
     if (form.password !== form.confirmPassword) {
-      setError('Passwords do not match');
+      setError("Passwords do not match");
       return;
     }
 
-    // Dummy register success
-    setSuccess('Registration successful! Redirecting to login...');
-    setTimeout(() => router.push('/login'), 1500); // ✅ navigate to login after 1.5s
+    setSuccess("Registration successful! Redirecting to login...");
+    setTimeout(() => router.push("/login"), 1500);
   };
 
   return (
@@ -60,6 +58,7 @@ export default function RegisterPage() {
         <TextField
           label="Name"
           name="name"
+          inputProps={{ "data-testid": "name-input" }}
           fullWidth
           margin="normal"
           value={form.name}
@@ -69,6 +68,7 @@ export default function RegisterPage() {
         <TextField
           label="Email"
           name="email"
+          inputProps={{ "data-testid": "email-input" }}
           fullWidth
           margin="normal"
           value={form.email}
@@ -79,6 +79,7 @@ export default function RegisterPage() {
           label="Password"
           name="password"
           type="password"
+          inputProps={{ "data-testid": "password-input" }}
           fullWidth
           margin="normal"
           value={form.password}
@@ -89,13 +90,20 @@ export default function RegisterPage() {
           label="Confirm Password"
           name="confirmPassword"
           type="password"
+          inputProps={{ "data-testid": "confirmPassword-input" }}
           fullWidth
           margin="normal"
           value={form.confirmPassword}
           onChange={handleChange}
           required
         />
-        <Button type="submit" variant="contained" fullWidth sx={{ mt: 2 }}>
+        <Button
+          type="submit"
+          variant="contained"
+          fullWidth
+          sx={{ mt: 2 }}
+          data-testid="register-button"
+        >
           Register
         </Button>
         <Typography variant="body2" align="center" sx={{ mt: 2 }}>
