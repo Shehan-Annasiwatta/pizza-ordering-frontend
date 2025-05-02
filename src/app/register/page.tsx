@@ -2,12 +2,24 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Container, TextField, Button, Typography, Box, Alert } from '@mui/material';
+import {
+  Container,
+  TextField,
+  Button,
+  Typography,
+  Box,
+  Alert,
+} from '@mui/material';
 import NextLink from 'next/link';
 
 export default function RegisterPage() {
   const router = useRouter();
-  const [form, setForm] = useState({ name: '', email: '', password: '', confirmPassword: '' });
+  const [form, setForm] = useState({
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+  });
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
@@ -20,7 +32,8 @@ export default function RegisterPage() {
     setError('');
     setSuccess('');
 
-    const emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
+    // Corrected email validation regex
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(form.email)) {
       setError('Invalid email format');
       return;
@@ -38,7 +51,9 @@ export default function RegisterPage() {
 
   return (
     <Container maxWidth="sm" sx={{ mt: 8 }}>
-      <Typography variant="h4" gutterBottom>Register</Typography>
+      <Typography variant="h4" gutterBottom>
+        Register
+      </Typography>
       {error && <Alert severity="error">{error}</Alert>}
       {success && <Alert severity="success">{success}</Alert>}
       <Box component="form" onSubmit={handleRegister} noValidate sx={{ mt: 2 }}>
